@@ -88,7 +88,7 @@ def create_item():
     item = {**item_data, "id": item_id}
     items[item_id] = item
         
-    return item, 201
+    return item
 
 
 @app.put('/item/<string:item_id>')
