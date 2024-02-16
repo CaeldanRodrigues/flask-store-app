@@ -39,6 +39,15 @@ def create_store():
     return new_store, 201
 
 
+@app.delete('/store/<string:store_id>')
+def delete_store(store_id):
+    try:
+        del stores[store_id]
+        return {'message': 'store deleted'}
+    except KeyError:
+        abort(404, message='store not found')
+
+
 @app.get('/items')
 def get_all_items():
     return {'items': list(items.values())}
