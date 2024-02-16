@@ -36,7 +36,7 @@ def create_store():
     new_store = {**store_data, "id": store_id}
     stores[store_id] = new_store
 
-    return new_store, 201
+    return new_store
 
 
 @app.delete('/store/<string:store_id>')
@@ -48,7 +48,7 @@ def delete_store(store_id):
         abort(404, message='store not found')
 
 
-@app.get('/items')
+@app.get('/item')
 def get_all_items():
     return {'items': list(items.values())}
 
