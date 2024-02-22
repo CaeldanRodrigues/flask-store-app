@@ -42,6 +42,8 @@ class LinkTagToItem(MethodView):
         item = ItemModel.query.get_or_404(item_id)
         tag = TagModel.query.get_or_404(tag_id)
 
+        if item.store.id != tag.store.id:
+            abort(400, message="Make sure item and tag belong to the same store before linking.")
 
         item.tags.append(tag)
 
