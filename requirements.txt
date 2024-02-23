@@ -3,3 +3,4 @@ flask-smorest
 python-dotenv
 sqlachemy
 flask-sqlachemy
+flask-jwt-extended
