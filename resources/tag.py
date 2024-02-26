@@ -1,6 +1,7 @@
 from  flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import jwt_required
 
 from db import db
 from models import TagModel, StoreModel, ItemModel
@@ -16,6 +17,7 @@ class TagsInStore(MethodView):
 
         return store.tags.all()
 
+    @jwt_required()
     @blp.arguments(TagSchema)
     @blp.response(201, TagSchema)
     def post(self, tag_data, store_id):
@@ -35,8 +37,9 @@ class TagsInStore(MethodView):
 
         return tag
     
-@blp.route('/item/<int:item_id>/tag/<string:tag_id>')
+@blp.route('/item/<int:item_id>/tag/<int:tag_id>')
 class LinkTagToItem(MethodView):
+    @jwt_required()
     @blp.response(201, TagSchema)
     def post(self, item_id, tag_id):
         item = ItemModel.query.get_or_404(item_id)
@@ -54,6 +57,7 @@ class LinkTagToItem(MethodView):
             abort(500, message='An error occurred while inserting the tag')
     
     
+    @jwt_required()
     @blp.response(200, TagSchema)
     def delete(self, item_id, tag_id):
         item = ItemModel.query.get_or_404(item_id)
@@ -82,6 +86,7 @@ class Tag(MethodView):
         
         return tag
     
+    @jwt_required()
     @blp.response(
             202,
             description='deletes a tag if no item is tagged with it',
