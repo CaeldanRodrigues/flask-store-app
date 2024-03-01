@@ -1,7 +1,7 @@
 flask
 flask-smorest
 python-dotenv
-sqlachemy
+SQLAlchemy
 flask-sqlachemy
 flask-jwt-extended
 passlib
