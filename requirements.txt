@@ -2,7 +2,7 @@ flask
 flask-smorest
 python-dotenv
 SQLAlchemy
-flask-sqlachemy
-flask-jwt-extended
+Flask-SQLAlchemy
+Flask-JWT-Extended
 passlib
 gunicorn
