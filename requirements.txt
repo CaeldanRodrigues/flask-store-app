@@ -5,3 +5,4 @@ sqlachemy
 flask-sqlachemy
 flask-jwt-extended
 passlib
+gunicorn
