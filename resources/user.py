@@ -1,3 +1,5 @@
+import os
+import requests
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import pbkdf2_sha256
@@ -15,6 +17,16 @@ from schemas import UserSchema
 from blocklist import BLOCKLIST
 
 blp = Blueprint("Users",  __name__, description='Operations on users')
+
+def send_simple_message(to, subject, body):
+    domain = os.getenv('MAILGUN_DOMAIN')
+    return requests.post(
+        f"https://api.mailgun.net/v3/{domain}/messages",
+        auth=("api", os.getenv('MAILGUN_API_KEY')),
+        data={"from": f"Caeldan Rodrigues <mailgun@{domain}>",
+            "to": [to],
+            "subject": subject,
+            "text": body})
 
 @blp.route('/register')
 class UserRegiester(MethodView):
