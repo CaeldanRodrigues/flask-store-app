@@ -9,3 +9,5 @@ Flask-Migrate
 gunicorn
 psycopg2
 requests
+redis
+rq
